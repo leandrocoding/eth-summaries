@@ -337,7 +337,7 @@ Für $A, B$ unitär (dasselbe für orthogonal) gilt:
   \item $A^{-1}$, $AB$ unitär
 \end{itemize}
 
-Für unitäre Matrizen gilt $| \det(A) | = 1$, für orthogonale Matrizen somit $\det(A) = \pm 1$.\\
+Für unitäre Matrizen gilt $| \det(A) | = 1$, für orthogonale Matrizen somit $\det(A) = \pm 1$. Ausserdem gilt $| \lambda | = 1$ für alle Eigenwerte $\lambda$ einer unitären Matrix. Entsprechend gilt $\lambda = \pm 1$ für alle \textbf{Eigenwerte einer orthogonalen Matrix}. 
 
 Eine \textbf{Rotationsmatrix} $R$ ist eine unitäre Matrix. In 2D ist $R = \begin{psmallmatrix*}
   \cos \theta & -\sin \theta \\
@@ -347,7 +347,7 @@ Eine \textbf{Rotationsmatrix} $R$ ist eine unitäre Matrix. In 2D ist $R = \begi
   0 & 1 & 0 & 0 \\
   \sin \theta & 0 & \cos \theta & 0 \\
   0 & 0 & 0 & 1
-\end{psmallmatrix}$.\\
+\end{psmallmatrix}$.
 
 Die \textbf{Householder-Matrix} $Q_u = I - 2uu^\top$ stellt eine Spiegelung an der Hyperebene welche orthogonal zu $u$ ist dar.
 
@@ -447,7 +447,7 @@ In einem Vektorraum $V$ beeinflusst die Wahl der Skalare die Dimension. $\C^n$ �
 
 Die Koeffizienten $\xi = (\xi_1, \cdots, \xi_n)^\top$ sind \textbf{Koordinaten} von $x$ bzgl. einer Basis $\mathcal{B}$ falls $x = \sum_{i=1}^n \xi_i b_i$ gilt. Die Summe wird Koordinatendarstellung genannt.
 
-Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine \textbf{eindeutige} Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
+Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine \textbf{eindeutige} Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$. Um zu \textbf{zeigen dass $U \oplus W = V$ gilt} zeigt man $\dim V = \dim U + \dim W$ und $U \cap W = \{0_V\}$.
 
 Falls  $f: U \rightarrow V$ und $g: V \rightarrow W$ lineare Abbildungen zwischen Vektorräumen sind so dass $ g \circ f$ ein Isomorphismus ist, dann gilt $V = \operatorname{Im}f \oplus \operatorname{Ker} g$.
 
@@ -984,7 +984,7 @@ Die Singulärwertszerlegung existiert für jede Matrix $A \in \E^{m \times n}$. 
   & \implies & \underbrace{(\Sigma_r^{-1} V_r^\hermconj A^\hermconj)}_{U_r^\hermconj (r \times m)} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r (m \times r)} = I\\
 \end{align*}
 
-$U_r$ kann zu einer unitären Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ, reell und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^\hermconj A = \Rank A A^\hermconj$. $V$ diagonalisiert $A^\hermconj A$, $U$ diagonalisiert $A A^\hermconj$.
+$U_r$ kann zu einer unitären $m \times m$ Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ, reell und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^\hermconj A = \Rank A A^\hermconj$. $V$ diagonalisiert $A^\hermconj A$, $U$ diagonalisiert $A A^\hermconj$.
 
 \begin{mainbox}{Singulärwertszerlegung}
   $$A = U \Sigma V^\hermconj = \sum_{k=1}^r u_k \sigma_k v_k^\hermconj$$
@@ -998,7 +998,7 @@ Ausserdem gilt $A^\hermconj = V \Sigma^\top U^\hermconj$ und falls $A$ invertier
   \item $\{u_1, \cdots, u_r\}$: Orthonormalbasis von $\Image A = \Columnspace(A)$
   \item $\{u_{r+1}, \cdots, u_m\}$: Orthonormalbasis von $\Kernel A^\hermconj = \Nullspace(A^\hermconj)$
   \item $\{v_1, \cdots, v_r\}$: Orthonormalbasis von $\Image A^\hermconj = \Columnspace(A^\hermconj)$
-  \item $\{v_{r+1}, \cdots, v_m\}$: Orthonormalbasis von $\Kernel A = \Nullspace(A)$
+  \item $\{v_{r+1}, \cdots, v_n\}$: Orthonormalbasis von $\Kernel A = \Nullspace(A)$
 \end{itemize}
 
 Bei einer \textbf{Selbstabbildung} gilt:
