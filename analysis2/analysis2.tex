@@ -118,6 +118,10 @@ Die \textbf{allgemeine Lösung} einer DGL setzt sich dann aus einer homogenen L�
   \item keine Funktionen von $y$ oder deren Ableitungen
 \end{itemize}
 
+\subsubsection*{Substitution}
+
+Manchmal ist es hilfreich $y(x)$ durch eine Funktion $h(x) = y(g(x))$ zu ersetzen. Betrachten wir die DGL $x^2 y''(x) - 3xy'(x) + 5y(x) = 0$. Wählen wir $h(t) = y(e^t)$ lässt sich die DGL mit konstanten Koeffizienten lösen (denn $x = e^t$).
+
 \subsection{Separierbare DGL}
 
 Eine Separierbare ODE erster Ordnung hat die Form $y' = b(x) g(y)$. Wir können diese dann nach $y$ und $x$ separieren und erhalten dann $\frac{y'}{g(y)} = b(x)$. Durch integrieren auf beiden Seiten und einer Substitution von $y$ erhalten wir dann:
@@ -326,6 +330,14 @@ $$D_v f(x) = \lim_{h \rightarrow 0} \frac{f(x + hv) - f(x)}{h}$$
 
  Die Richtungsableitung $D_v f(x)$ existiert, wenn $t \mapsto f(x + hv)$ in $h = 0$ differenzierbar ist. Es gilt $D_v f(x) = D f(x) v$. Für die $k$-te partielle Ableitungen gilt dann $\frac{\partial f}{\partial x_k} = D_{e_k} f$.
 
+\subsubsection*{Landau Notation in der Analysis}
+
+Es gilt $f \in o(h)$ falls:
+
+$$\lim_{h \to 0} \frac{f(h)}{h} = 0$$
+
+In der Analysis betrachtet man die Landau Notation generell für $\lim_{h \to 0}$ statt $\lim_{h \to \infty}$. Es gilt deshalb bspw. $x^5 \in \mathcal{O}(x^4)$.
+
 \subsection{Differenzierbarkeit}
 Sei \(f: \X \subseteq \R^n \to \R^m, x_0 \in \X\). \(f\) ist differenzierbar an der Stelle \(x_0\), falls eine lineare Abbildung \(L: \R^n \to \R^m\) (d.h. eine \(m \times n\)-Matrix \(L\)) existiert, so dass \(\forall x_0 + v \in \X\):
 \[f(x_0 + v) = f(x_0) + L(v) + R(x_0,v)\]
@@ -341,8 +353,8 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
 \begin{enumerate}
   \item \(f\) ist stetig im Punkt \(x_0\)
   \item \(f\) hat alle partiellen Ableitungen am Punkt \(x_0\) und die Matrix, welche \(Df(x_0): x \mapsto Ax\) repräsentiert, ist die Jacobi-Matrix von \(f\) am Punkt \(x_0\), d.h. \(A = J_f(x_0)\)
-  \item \(d(f+g)(x_0) = Df(x_0) + Dg(x_0)\)
-  \item Wenn \(m = 1\) ist, dann ist \(f\cdot g\) differenzierbar. Wenn ausserdem \(g \ne 0\) gilt, dann ist es \(f/g\) auch.
+  \item \(D(f+g)(x_0) = Df(x_0) + Dg(x_0)\)
+  \item Wenn \(m = 1\) ist, dann ist \(f\cdot g\) differenzierbar. Wenn ausserdem \(g(x) \ne 0\) gilt, dann ist es \(f/g\) auch.
 \end{enumerate}
 
 \begin{subbox}{Kettenregel}
@@ -360,6 +372,14 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
   Der Tangentialraum eines Graphen \(f\) am Punkt \(x_0\) ist gegeben durch \(g(x) = f(x_0) + Df(x_0)(x-x_0)\).
 \end{subbox}
 
+\subsubsection*{Gegenbeispiel}
+
+Sei $f$ mit $f(0, 0) = 0$ und:
+
+$$f: \R^2 \mapsto \R, (x, y) \mapsto \frac{xy}{x^2 + y^2}$$
+
+$f$ hat alle partiellen Ableitungen aber ist nicht stetig in $(0, 0)$.
+
 \subsection{Level sets}
 
 \begin{mainbox}{Level sets}
@@ -368,7 +388,7 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
   $$(f(\gamma(t)))' = 0 \implies \nabla f(\gamma(t)) \gamma'(t) = 0$$
 \end{mainbox}
 
-Das heisst der Gradient ist immer orthogonal zum Tangentenvektor auf der Kurve.
+Das heisst der Gradient ist immer orthogonal zum Tangentenvektor auf der Kurve. Für die Richtungsableitung auf der Kurve gilt $D_{\gamma'(t)}f(\gamma(t)) = 0$.
 
 \subsection{Höhere Ableitungen}
 Sei \(\X \subseteq \R^n\) offen, \(f: \X \mapsto \R^m\). \(f\) ist eine Funktion der Klasse \(C^1\) falls \(f\) auf \(\X\) differenzierbar ist und alle partiellen Ableitungen stetig sind. \\
@@ -385,10 +405,29 @@ $$\pdv{f}{x_i, x_j} = \pdv{f}{ x_j, x_i}$$
 
 Es gilt wegen der Symmetrie $\text{Hess}_f(x_0) = \nabla^2 f(x_0) = D(\nabla f)(x_0)$.
 
+Um die Hesse-Matrix einer Funktion $f$ an einer bestimmten Stelle $x_0$ zu berechnen kann es hilfreich sein zuerst das Taylorpolynom von $f$ an der Stelle $x_0$ zu berechnen und dann die Koeffizienten abzulesen. 
+
+\subsubsection*{Hesse-Matrix mit Taylorpolynom}
+
+Um die Hesse-Matrix von $f(x, y,z) = \sqrt{x^4 + y^4 + z^2 + 1}$ an der Stelle $(0, 0, 0)$ zu berechnen, berechnen wir zuerst das Taylorpolynom von $f$ an der Stelle $(0, 0, 0)$. Es gilt (Taylor von $\sqrt{1 + x}$):
+
+\begin{align*}
+  f(x, y, z) & = 1 + \frac{1}{2}(x^4 + y^4 + z^2) + o(x^4 + y^4 + z^2)\\
+  & = 1 + \frac{1}{2}z^2 + o(x^2 + y^2 + z^2)
+\end{align*}
+
+Da $o(x^2 + y^2 + z^2) = o(|| (x,y,z) ||_2^2)$ ist dies das eindeutige Taylorpolynom zweiten Grades. Die Hesse-Matrix ist (Koeffizienten ablesen, siehe Taylorpolynom):
+
+$$Hess_f(0, 0, 0) = \begin{bsmallmatrix}
+  0 & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 1
+\end{bsmallmatrix}$$
+
 \subsection{Taylorpolynome}
 Sei \(k \le 1\) und \(f: \X \mapsto \R\) ist eine Funktion der Klasse \(C^k\) auf \(\X\). Sei \(x \in \X\) fix. Das \(k\)-te Taylorpolynom von \(f\) am Punkt \(x\) ist das Polynom in \(n\) Variablen vom Grad \(\le k\):
 \begin{align*}
-  &T_k f(h; x) = f(x) + \sum_{i=1}^n \partial_i f(x) \cdot h_i + \dots \\
+  &T_k f(x; h) = f(x) + \sum_{i=1}^n \partial_i f(x) \cdot h_i + \dots \\
   &+ \sum_{m_1 + \cdots + m_n = k} \frac{1}{m_1! \cdots m_n!} \pdv{^k f(x) }{x_1^{m_1} \cdots \partial x_n^{m_n}} \cdot h_1^{m_1} \cdots h_n^{m_n}
 \end{align*}
 
@@ -402,12 +441,26 @@ Mit vereinfachter Notation erhält man:
 Gibt es ein Polynom $P(h)$ mit Grad $\leq m$ welches folgende Eigenschaft hat, ist $P$ das eindeutig bestimmte $m$-te Taylorpolynom:
 $$f(x + h) = P(h) + o(\lVert h \rVert_2^m)$$
 
-Wir können diese Eindeutigkeit verwenden um Taylorpolynome mit bekannten Funktionen zu finden (vorrausgesetzt der Fehlerterm passt). Dies kann beispielsweise auf $exp(x^2 + y^2)$ angewendet werden, indem man $x^2 + y^2$ in das Taylorpolynom von $e^x$ einsetzt und dann den Fehlerterm überprüft.
+Wir können diese Eindeutigkeit verwenden um Taylorpolynome mit bekannten Funktionen zu finden (vorrausgesetzt der Fehlerterm passt). 
+
+Dies kann beispielsweise auf $\exp(x^2 + y^2)$ angewendet werden, indem man $x^2 + y^2$ in das Taylorpolynom von $e^x$ einsetzt und dann den Fehlerterm überprüft.
+
+\subsubsection*{Verwendung von 1d Taylorpolynomen}
+
+Für das Taylorpolynom von $\exp(x^2 + y^2)$ betrachten wir zuerst das 1d Taylorpolynom $\exp(t) = 1 + t + \frac{t^2}{2} + o(t^2)$. Den Fehlerterm erhalten wir hierbei weil dies das eindeutige Taylorpolynom vom zweiten Grad ist. Wir setzen nun $x^2 + y^2$ ein und erhalten:
+
+\begin{align*}
+  \exp(x^2 + y^2) = 1 + (x^2 + y^2) + \frac{1}{2} (x^2 + y^2)^2 + o((x^2 + y^2)^2)\\
+    = \underbrace{1 + x^2 + y^2 + \frac{1}{2} x^4 + x^2 y^2 + \frac{1}{2} y^4}_{T_{f,4}(x,y)} + \underbrace{o(x^4 + x^2 y^2 + y^4)}_{= o(\lVert (x,y) \rVert_2^4)}
+\end{align*}
+
+Da der Fehlerterm in $o(\lVert (x,y) \rVert_2^4)$ ist, ist dies das eindeutige Taylorpolynom vierten Grades.
 
 \subsubsection*{Beispiele}
+
 \begin{align*}
   T_1 f(\vec{x}; x_0) &:= f(x_0) + \nabla f(x_0) \cdot \vec{x} \\
-  T_2 f(\vec{x}; x_0) &:= T_1f + \frac{1}{2} \cdot \vec{x}^\top \cdot \text{Hess}_f(x_0) \cdot \vec{x}
+  T_2 f(\vec{x}; x_0) &:= T_1 f(\vec{x}; x_0) + \frac{1}{2} \cdot \vec{x}^\top \cdot \text{Hess}_f(x_0) \cdot \vec{x}
 \end{align*}
 
 \subsection{Definit}
@@ -460,7 +513,7 @@ Wenn \(x_0 \in \X\) ein lokales Extrema ist, dann gilt ausserdem \(\nabla f(x_0)
 Wenn $f$ nach $\R$ geht und falls $g$ streng monoton ist, können wir auch die Funktion $g \circ f$ betrachten. Bspw. $g = \ln$ um ein Produkt in eine Summe zu verwandeln.
 
 \subsubsection*{Kritische Punkte}
-Ein Punkt \(x_0 \in \X\) mit \(\nabla f(x_0) = 0\) ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
+Ein Punkt \(x_0 \in \X\) mit \(\nabla f(x_0) = 0\) ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) = 0\), dann ist \(x_0\) degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
 
 \subsubsection*{Sattelpunkt}
 Wenn ein kritischer Punkt weder Maximum noch Minimum ist, dann nennen wir ihn Sattelpunkt.
@@ -476,29 +529,30 @@ Sei \(f: \X \subseteq \R^n \mapsto \R, \X\) offen und \(f\in C^2\). Sei \(x_0\) 
   \item $\text{Hess}_f(x_0)$ neg. def. \(\implies\) $x_0$ ist lokales Maximum.
   \item $\text{Hess}_f(x_0)$ indefinit \(\implies\) $x_0$ ist Sattelpunkt.
 \end{enumerate}
-Dies funktioniert nicht, wenn \(x_0\) ein degenerierter kritischer Punkt ist. In einem solchen Fall müssen die Vorzeichen überprüft werden.
+Dies funktioniert nicht, wenn \(x_0\) ein degenerierter kritischer Punkt ist. In einem solchen Fall müssen die Vorzeichen überprüft werden. Trotzdem ist jeder (auch degenerierte) kritische Punkt entweder ein lokales Minimum, lokales Maximum oder ein Sattelpunkt.
 
 \section{Integrale in \texorpdfstring{\(\R^n\)}{Rⁿ}}
-\subsection{Einfache Integrale}
 Für \(f: \R \mapsto \R^n\) ist das Integral definiert als
 \[\int_a^b f(t)dt = 
-\begin{pmatrix*}
+\begin{psmallmatrix*}
   \int_a^b f_1(t) dt \\
   \vdots\\
   \int_a^b f_n(t) dt
-\end{pmatrix*}
+\end{psmallmatrix*}
 \]
 
-\begin{mainbox}{Kurve}
-  Eine parametrisierte Kurve in \(\R^n\) ist eine stetige Ableitung \(\gamma: \left[a,b\right] \mapsto \R^n\) wobei \(\gamma\) stückweise in \(C^1\) ist, d.h. wir können \(\gamma\) so partitionieren, das alle Partitionen in \(C^1\) sind. Eine parametrisierte Kurve muss nicht injektiv sein.
-\end{mainbox}
 \subsection{Wegintegrale}
+
+\begin{mainbox}{Kurve}
+  Eine parametrisierte Kurve in \(\R^n\) ist eine stetige Funktion \(\gamma: \left[a,b\right] \mapsto \R^n\) wobei \(\gamma\) stückweise in \(C^1\) ist, d.h. wir können \(\gamma\) so partitionieren, das alle Partitionen in \(C^1\) sind. Eine parametrisierte Kurve muss nicht injektiv sein.
+\end{mainbox}
+
 Sei \(\gamma : \left[a,b\right] \mapsto \R^n\) eine parametrisierte Kurve und \(\X \subseteq \R^n\) eine Menge, welche das Bild von \(\gamma\) beinhaltet. Sei \(f : \X \mapsto \R^n\) eine stetige Funktion. Dann ist ein Wegintegral (auch: Kurvenintegral) definiert als:
 \[\int_\gamma f(s) ds = \int_a^b f(\gamma(t)) \cdot \gamma'(t) dt\]
 
 Wegintegrale haben folgende Eigenschaften:
 \begin{enumerate}
-  \item Sie sind unabhängig von orientierungserhaltenden Reparametrisierungen, d.h. sie hängen nur vom Bild der Kurve und nicht von der Parametrisierung ab. 
+  \item Sie sind unabhängig von orientierungserhaltenden Reparametrisierungen, d.h. sie hängen nicht von der Parameterisierung ab. 
   \begin{align*}
     \gamma&: [a,\, b] \mapsto \R^n\\
     \tilde{\gamma}&: [c,\, d] \mapsto \R^n\\
@@ -516,7 +570,7 @@ Wegintegrale haben folgende Eigenschaften:
     \end{cases}\\
     \int_{\gamma_1 + \gamma_2} f(s) \; ds &= \int_{\gamma_1} f(s) \; ds + \int_{\gamma_2} f(s)\; ds
   \end{align*}
-  \item Sei \(\gamma : \left[a,b\right] \mapsto \R^n\) ein Pfad und \(-\gamma\) ist der Pfad in die Gegenrichtung (d.h. \((-\gamma)(t) = \gamma(a + b - t)\)). Dann gilt
+  \item Sei \(\gamma : \left[a,b\right] \mapsto \R^n\) ein Pfad und \(-\gamma\) ist der Pfad in die Gegenrichtung (d.h. \((-\gamma)(t) = \gamma(b - t)\)). Dann gilt
   \[\int_{-\gamma} f(s)ds = -\int_\gamma f(s) ds\]
 \end{enumerate}
 
@@ -541,7 +595,7 @@ Es gilt ausserdem folgende notwendige, aber nicht ausreichende Bedingung:
 \[f \text{ ist konservativ }\implies \pdv{f_i}{x_j} = \pdv{f_j}{x_i}\]
 
 \begin{subbox}{Wegzusammenhängend}
-  Sei \(\X \subseteq \R^n\) offen. \(\X\) ist wegzusammenhängend, falls für jedes Paar an Punkten \(x, y \in \X\) ein Pfad \(\gamma : \left(0,1\right] \mapsto \X\) existiert, der in \(C^1\) ist und \(\gamma(0) = x, \gamma(1) = y\) hält.
+  Sei \(\X \subseteq \R^n\) offen. \(\X\) ist wegzusammenhängend, falls für jedes Paar an Punkten \(x, y \in \X\) ein Pfad \(\gamma : \left[0,1\right] \mapsto \X\) existiert, der in \(C^1\) ist und \(\gamma(0) = x, \gamma(1) = y\) hält.
 \end{subbox}
 
 \begin{subbox}{Sternförmig}
@@ -576,6 +630,17 @@ Bildet man die Determinante ist die $j$-te Reihe der Kofaktor von $e_j$.
 
 Entsprechend gilt für $\text{curl}(f)$ einer zweidimensionalen Funktion $\text{curl}(f) = \partial_x f_2 - \partial_y f_1$.
 
+\subsubsection*{Gegenbeispiel}
+
+Gegeben sei die Funktion:
+
+$$f: \R^2 \backslash \{0\} \mapsto \R^2, (x, y) \mapsto \begin{bmatrix}
+  \frac{-y}{x^2+y^2}\\
+  \frac{x}{x^2+y^2}
+\end{bmatrix}$$
+
+Es gilt $\text{curl}(f) = 0$, aber es gibt auch geschlossene Wegintegrale welche nicht $0$ sind.
+
 \subsection{Riemann-Integral in \texorpdfstring{\(\R^n\)}{R^n}}
 \begin{subbox}{Partition}
   Ein Quader oder Box $Q \subseteq \R^n$ ist eine Menge der Form  $Q = [a_1, b_1] \times \cdots \times [a_n, b_n]$ mit $a_k, b_k \in \R$. Man definiert dann das Volumen $\vol(Q) = \Pi_{k=1}^n (b_k - a_k)$. Wir nennen $\mathcal{P} = \{ Q_1, \cdots, Q_m \}$ eine Partition von $Q$ falls $Q = \cup_{k=1}^m Q_k$ gilt und für alle $1 \leq k, l \leq m$ gilt dass $\interior(Q_k) \cap \interior(Q_l) = \emptyset$.
@@ -599,6 +664,8 @@ Falls die Ober- und Untersumme von $f$ gleich sind, so ist $f$ Riemann-integrier
 
 $$ \int_Q f \dx = L(f) = U(f) $$
 
+Falls $f$ stetig ist, ist $f$ auch riemann-integrierbar.
+
 \subsubsection*{Nicht-Quadratische Flächen}
 Sei \(A \subseteq R\) eine Menge. \(f : A \subseteq R \mapsto \R\) ist auf \(A\) integrierbar, falls \(f \cdot \X_A\) auf \(R\) integrierbar ist. 
 \[\int_R f(x) \cdot \X_A(x) \mathop{dx} \text{ oder } \int_A f(x) \mathop{dx}\]
@@ -614,7 +681,7 @@ Sei \(f,g : A \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes:
   \item Falls \(f(x) \ge 0\) und \(B \subseteq A\), dann gilt:
   \[\int_B f(x) \mathop{dx} \le \int_A f(x) \mathop{dx}\]
   \item Dreiecksungleichung:
-    \[\left| \int_A f(x) \mathop{dx}\right| \le \int_A \left|f(x)\right| \mathop{dx}\]
+    $$\left| \int_A f(x) \mathop{dx}\right| \le \int_A \left|f(x)\right| \mathop{dx} \leq (\sup_A |f(x)|)\vol(A)$$
   \item Falls \(f = 1\), dann gilt:
   \[\int_A f(x) \mathop{dx} = \int_A 1 \mathop{dx} = \vol(A)\]
 \end{enumerate}
@@ -656,12 +723,16 @@ In $n=3$ ist eine Union von endlich vielen Bildern von parameterisierten Fläche
   \[\int_A f(x,y) \mathop{d(x,y)} = \int_a^b \left(\int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) \mathop{dy}\right) \mathop{dx}\]
 \end{enumerate}
 
+\subsubsection*{Uneigentliche Integrale}
+
+Sei $X \subseteq \R^n$ eine offene Menge und $f: X \mapsto \R$ eine Funktion so dass $\int_K f(x) \dx$ für jede kompakte Teilmenge $K \subseteq X$ existiert. Sei ausserdem eine Reihe von kompakten Mengen $X_k$ mit $X_k \subseteq X_{k+1}$ und $\cup_{k=1}^\infty X_k = X$. Falls $\lim_{n \to \infty} \int_{X_n} f(x) \dx$ existiert konvergiert $\int_X f(x) \dx := \lim_{n \to \infty} \int_{X_n} f(x) \dx$.
+
 \subsection{Variablenwechsel}
 
 $f: X \mapsto \R$ differenzierbar mit $X \subseteq \R^n$ offen ist ein Variablenwechsel um $x_0 \in X$ falls es $r > 0$ gibt so dass für $B_r := \{x \in \R^n \mid ||x-x_0|| < r \}$ gilt dass $Y = f(B_r(x_0))$ offen ist und eine differenzierbare Abbildung $g: Y \mapsto B$ existiert so dass $f \circ g = \mathrm{id}$ bzw. $g \circ f = \mathrm{id}$.
 
 \begin{subbox}{Inverse}
-  Sei $X \subseteq \R^n$ offen, $f: X \mapsto \R^n$ differenzierbar. Wenn für $x_0 \in X$ gilt $det(J_f(x_0)) \neq 0$ ($J_f(x_0)$ ist invertierbar), dann ist $f$ ein Variablenwechsel um $x_0$. Dann gilt $J_g(f(x_0)) = J_f(x_0)^{-1}$.
+  Sei $X \subseteq \R^n$ offen, $f: X \mapsto \R^n$ differenzierbar. Wenn für $x_0 \in X$ gilt $\det(J_f(x_0)) \neq 0$ ($J_f(x_0)$ ist invertierbar), dann ist $f$ ein Variablenwechsel um $x_0$. Dann gilt $J_g(f(x_0)) = J_f(x_0)^{-1}$.
 \end{subbox}
 
 Sei \(\partial A\) der Rand einer Menge \(A\):
@@ -723,7 +794,7 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
 \begin{mainbox}{Satz von Green}
   Sei \(A \subseteq \R^2\) ein reguläres Gebiet und \(f: U \mapsto \R^2\) ein Vektorfeld der Klasse \(C^1\), wobei \((A \cup \partial A) \subseteq U \subseteq \R^2\). Dann gilt
   \[\int_{\partial A} f(x) \mathop{ds} = \int \int_A \left(\partial_x f_2 - \partial_y f_1 \right) \dx \dy\]
-  wobei $\text{curl}(f) \coloneqq \partial_x f_2 - \partial_y f_1$.
+  wobei $\text{curl}(f) \coloneqq \partial_x f_2 - \partial_y f_1$ und das Linienintegral entlang einer parameterisierten Jordan-Kurve erfolgt.
 \end{mainbox}
 Um Flächen mit dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit \(\text{curl}(f) = 1\), beispielsweise (für beliebige $g(x), g(y)$):
 
@@ -794,7 +865,23 @@ wobei $|R_3(n)| \le \frac{\sqrt{3}}{216}\cdot\frac{1}{n^2} \ \forall n \ge 1$
    \item $q > 1 \implies \sum_{n=1}^\infty a_n$ und $\sum_{n=1}^\infty |a_n|$ divergieren.
   \end{itemize}
 \end{mainbox}
-  
+
+\subsection{Extrema in 1D}
+
+Sei $x_0$ ein kritischer Punkt. Falls $f''(x_0) > 0$ ist $x_0$ ein Minimum, falls $f''(x_0) < 0$ ist $x_0$ ein Maximum. Ist $f''(x_0) = 0$, leiten wir ab bis $f^{(k)}(x_0) \neq 0$. Ist $f^{(k)}(x_0) > 0$ für $k$ gerade, so ist $x_0$ ein Minimum, ist $f^{(k)}(x_0) < 0$ für $k$ gerade, so ist $x_0$ ein Maximum. Ist $k$ ungerade, so ist $x_0$ ein Sattelpunkt.
+
+\subsection{Potenzreihen}
+\begin{align*}
+\exp(x) &= \sumn \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots & r &= \infty \\
+\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
+\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots & r &= \infty \\
+\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots & r &= 1 \\
+\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} = x + \frac{x^3}{3!} + \frac{x^5}{5!} + \cdots & r &= \infty \\
+\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} = 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots & r &= \infty \\
+\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots =  & r &= 1 \\
+e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3}{3!} + \cdots & r &= \infty \\
+\sqrt{1+x} &= 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} + \mathcal{O}(x^4) & r &< 1 \\
+\end{align*}
 
 \begin{mainbox}{Partialbruchzerlegung}
   Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)}$ wird wie folgend berechnet:
@@ -816,23 +903,6 @@ wobei $|R_3(n)| \le \frac{\sqrt{3}}{216}\cdot\frac{1}{n^2} \ \forall n \ge 1$
 Für ein monisches Polynom $x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0$ muss jede Nullstelle $a_0$ teilen.\\
 
 Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{1}{q} - \frac{1}{q + 1}$ oder $\frac{1}{q(q-1)(q+1)} = \frac{-1}{q} + \frac{1}{2(q+1)} + \frac{1}{2(q-1)}$.
-
-\subsection{Extrema in 1D}
-
-Sei $x_0$ ein kritischer Punkt. Falls $f''(x_0) > 0$ ist $x_0$ ein Minimum, falls $f''(x_0) < 0$ ist $x_0$ ein Maximum. Ist $f''(x_0) = 0$, leiten wir ab bis $f^{(k)}(x_0) \neq 0$. Ist $f^{(k)}(x_0) > 0$ für $k$ gerade, so ist $x_0$ ein Minimum, ist $f^{(k)}(x_0) < 0$ für $k$ gerade, so ist $x_0$ ein Maximum. Ist $k$ ungerade, so ist $x_0$ ein Sattelpunkt.
-
-
-\subsection{Potenzreihen}
-\begin{align*}
-\exp(x) &= \sumn \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots & r &= \infty \\
-\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
-\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots & r &= \infty \\
-\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots & r &= 1 \\
-\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} & r &= \infty \\
-\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} & r &= \infty \\
-\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= 1 \\
-e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
-\end{align*}
 
 \section{Parameterisierungen}
 
@@ -893,14 +963,20 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
 \begin{itemize}
  \item $\sin^2(\alpha) + \cos^2(\alpha) = 1$
  \item $\cosh^2(\alpha) - \sinh^2(\alpha) = 1$
- \item $\sin(z) = \frac{e^{iz} - e^{-iz}}{2}$ und $\cos(z) = \frac{e^{iz} + e^{-iz}}{2}$
+ \item $\sin(z) = \frac{e^{iz} - e^{-iz}}{2i}$ und $\cos(z) = \frac{e^{iz} + e^{-iz}}{2}$
+ \item $\sinh(x) = \frac{e^x - e^{-x}}{2}$ und $\cosh(x) = \frac{e^x + e^{-x}}{2}$
+ \item $\cos(x)^n = \frac{1}{2^n} \sum_{k=0}^n {n \choose k} \cos((2k - n)x)$
 \end{itemize}
 
 % start larger spacing in tables
 \begingroup
 \renewcommand*{\arraystretch}{2}
 
-\begin{mainbox}{Wichtige Werte}
+\begin{center}
+  \includegraphics[width=0.7 \linewidth]{include_degrees_circle.pdf}
+\end{center}
+
+\begin{mainbox}{}
   \begin{center} 
     \begin{tabular}{c|cccccc}
       deg & 0° & 30° & 45° & 60° & 90° & 180° \\
@@ -913,12 +989,20 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
   \end{center}
 \end{mainbox}
 
-\begin{center}
-  \includegraphics[width=\linewidth]{include_degrees_circle.pdf}
-\end{center}
-
 \section{Tabellen}
 
+\subsection{$n$-te Ableitungen}
+\begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f^{(n)}(x)}$ \\
+  \midrule
+  $\sin(x)$ & $\sin(\frac{n\pi}{2} + x)$\\
+  $f + g$ & $f^{(n)} + g^{(n)}$\\
+  $f \cdot g$ & $\sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$\\
+  \bottomrule
+  \end{tabularx}
+\end{center}
 
 \subsection{Trigonometrische Identitäten}
 \begin{center}
@@ -965,6 +1049,14 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
   \end{tabularx}
 \end{center}
 
+\subsection{Rekursive Integrale}
+
+$J_n = \int \frac{1}{(1 + x^2)^n} \dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
+
+\subsection{Binomischer Lehrsatz}
+
+$$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
+
 \subsection{Ableitungen (I)}
 \begin{center}
   % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
@@ -990,6 +1082,18 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
   $\frac{1}{2}(\ln(x))^2$ & $\frac{\ln(x)}{x}$ & $\frac{1 - \ln(x)}{x^2}$ \\
   $\frac{x}{\ln(a)} (\ln|x| -1)$ & $\log_a |x|$ & $\frac{1}{\ln(a)x}$ \\
   \bottomrule
+  \end{tabularx}
+\end{center}
+
+
+\subsection{Ungleichungen}
+\begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+    $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \mathbb{N}, x > -1$\\
+    $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$\\
+    $2|xy| \leq \epsilon x^2 + \frac{1}{\epsilon} y^2$ für $\forall \epsilon > 0$ und $\forall x,y \in \mathbb{R}$\\
+    $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$\\
+    $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
   \end{tabularx}
 \end{center}
 
@@ -1030,19 +1134,6 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
   \end{tabularx}
 \end{center}
 
-\subsection{$n$-te Ableitungen}
-\begin{center}
-  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-  \toprule
-  $\mathbf{f(x)}$ & $\mathbf{f^{(n)}(x)}$ \\
-  \midrule
-  $\sin(x)$ & $\sin(\frac{n\pi}{2} + x)$\\
-  $f + g$ & $f^{(n)} + g^{(n)}$\\
-  $f \cdot g$ & $\sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$\\
-  \bottomrule
-  \end{tabularx}
-\end{center}
-
 \subsection{Weitere Ableitungen}
 \begin{center}
   \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
@@ -1060,25 +1151,6 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
   $\cosh(x)$ & $\sinh(x)$ \\
   $\sinh(x)$ & $\cosh(x)$ \\
   \bottomrule
-  \end{tabularx}
-\end{center}
-
-\subsection{Rekursive Integrale}
-
-$J_n = \int \frac{1}{(1 + x^2)^n} \dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
-
-\subsection{Binomischer Lehrsatz}
-
-$$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
-
-\subsection{Ungleichungen}
-\begin{center}
-  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-    $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \mathbb{N}, x > -1$\\
-    $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$\\
-    $2|xy| \leq \epsilon x^2 + \frac{1}{\epsilon} y^2$ für $\forall \epsilon > 0$ und $\forall x,y \in \mathbb{R}$\\
-    $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$\\
-    $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
   \end{tabularx}
 \end{center}
 
